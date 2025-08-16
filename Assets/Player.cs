@@ -24,7 +24,14 @@ public class Player : MonoBehaviour
     public bool leftCheck;
     public float lrcheckr;
 
-    public float wallSlideSpeed = 1.5f;
+    public float dashingVelocity;
+    public bool isdashing;
+    public bool candash;
+
+    private float clicked = 0;
+    private float clicktime = 0;
+    private float clickdelay = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -62,15 +69,6 @@ public class Player : MonoBehaviour
         bool touchingWall = (rightCheck || leftCheck);
         bool movingAgainstWall = (rightInput && rightCheck) || (leftInput && leftCheck);
 
-        if (!isGrounded && touchingWall && movingAgainstWall && rb.velocity.y < 0 && Input.GetButton("Jump"))
-        {
-            rb.gravityScale = wallSlideSpeed;
-        }
-        else 
-        {
-            rb.gravityScale = 3.0f;
-        }
-
 
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
@@ -92,5 +90,22 @@ public class Player : MonoBehaviour
         }
 
         animator.SetFloat("yVelocity", rb.velocity.y);
+        dashing();
+
+    }
+
+    void dashing()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            clicked++;
+            if (clicked == 1) clicktime = Time.time;
+        }
+        if (clicked > 1 && Time.time - clicktime < clickdelay)
+        {
+            clicked = 0;
+            clicktime = 0;
+            Debug.Log("dash");
+        }   
     }
 }
