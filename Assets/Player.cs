@@ -195,6 +195,16 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(leftCheckobj.transform.position, lrcheckr);
     }
-}
+
 
 }
+
+    void OnTriggerEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "CheckPoint")
+        {
+            lastcheckpoint = transform.position;
+        }
+    }
+}
+
