@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Plattform rechts
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: ea77607199c514248828378dfa7c0f7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17bd6df50106f5c4c95a4a73aab82a6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
