@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -32,11 +33,15 @@ public class Player : MonoBehaviour
 
     private bool leftInput, rightInput;
 
+    public Vector3 lastcheckpoint;
+    public Image fadeImage;
+    public float fadeDuration = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        lastcheckpoint = transform.position;
     }
 
     // Update is called once per frame
@@ -105,6 +110,8 @@ public class Player : MonoBehaviour
         {
             Trail.enabled = false;
         }
+
+    
     }
 
     public IEnumerator dashing()
@@ -130,5 +137,39 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(couldown);
         candash = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "death")
+        {
+            StartCoroutine(death());
+        }
+    }
+
+    public IEnumerator death() 
+    {   StartCoroutine(Fade(0, 1));
+        yield return new WaitForSeconds(0.5f);;
+        transform.position = lastcheckpoint;
+        yield return new WaitForSeconds(0.5f);;
+        StartCoroutine(Fade(1, 0));
+        
+    }
+
+    private IEnumerator Fade(float startAlpha, float endAlpha)
+    {
+        float elapsedTime = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        fadeImage.color = color;
     }
 }
