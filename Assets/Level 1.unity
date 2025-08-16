@@ -564,7 +564,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6.03125
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1091,7 +1091,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 96e18168c6c3ff244b37074d40500717, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1165,13 +1165,13 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
 --- !u!1 &669753743
