@@ -37,6 +37,10 @@ public class Player : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 0.5f;
 
+    public AudioSource dashsound;
+    public GameObject runParticlesl;
+    public GameObject runParticlesr;
+
 
     // Start is called before the first frame update
     void Start()
@@ -118,6 +122,7 @@ public class Player : MonoBehaviour
     {    
         candash = false;
         isdashing = true;
+        dashsound.Play();
 
         if(!leftInput && !rightInput)
         {
