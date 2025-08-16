@@ -58,8 +58,7 @@ public class Player : MonoBehaviour
         }
         
 
-
-        transform.Translate(new Vector3(direction, 0, 0) * speed * Time.deltaTime);
+        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
         animator.SetFloat("direction", Mathf.Abs(direction));
 
