@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastcheckpoint = transform.position;
+        lastcheckpoint = new Vector3(12, -40, 0);
     }
 
     // Update is called once per frame
