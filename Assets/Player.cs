@@ -148,10 +148,13 @@ public class Player : MonoBehaviour
     }
 
     public IEnumerator death() 
-    {   StartCoroutine(Fade(0, 1));
+    {   
+        animator.SetBool("Die", true);
+        StartCoroutine(Fade(0, 1));
         yield return new WaitForSeconds(0.5f);;
         transform.position = lastcheckpoint;
         yield return new WaitForSeconds(0.5f);;
+        animator.SetBool("Die", false);
         StartCoroutine(Fade(1, 0));
         
     }
