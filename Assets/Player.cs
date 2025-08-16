@@ -175,4 +175,26 @@ public class Player : MonoBehaviour
         color.a = endAlpha;
         fadeImage.color = color;
     }
+
+    void OnDrawGizmos()
+{
+    if (groundCheck != null)
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(groundCheck.transform.position, groundCheckRadius);
+    }
+
+    if (rightCheckobj != null)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(rightCheckobj.transform.position, lrcheckr);
+    }
+
+    if (leftCheckobj != null)
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(leftCheckobj.transform.position, lrcheckr);
+    }
+}
+
 }
