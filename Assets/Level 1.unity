@@ -1044,7 +1044,10 @@ MonoBehaviour:
   rightCheck: 0
   leftCheck: 0
   lrcheckr: 0.4
-  wallSlideSpeed: 0.3
+  dashingVelocity: 13
+  candash: 1
+  isdashing: 0
+  couldown: 4
 --- !u!95 &500474919
 Animator:
   serializedVersion: 5

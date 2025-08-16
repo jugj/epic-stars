@@ -25,12 +25,11 @@ public class Player : MonoBehaviour
     public float lrcheckr;
 
     public float dashingVelocity;
-    public bool isdashing;
     public bool candash;
+    public bool isdashing;
+    public float couldown;
 
-    private float clicked = 0;
-    private float clicktime = 0;
-    private float clickdelay = 0.5f;
+    private bool leftInput, rightInput;
 
 
     // Start is called before the first frame update
@@ -42,8 +41,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool leftInput = Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow);
-        bool rightInput = Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow);
+        leftInput = Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow);
+        rightInput = Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow);
 
         if (leftInput && rightInput)
         {
@@ -70,7 +69,7 @@ public class Player : MonoBehaviour
         bool movingAgainstWall = (rightInput && rightCheck) || (leftInput && leftCheck);
 
 
-        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        if (!isdashing) rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
         animator.SetFloat("direction", Mathf.Abs(direction));
 
@@ -90,22 +89,38 @@ public class Player : MonoBehaviour
         }
 
         animator.SetFloat("yVelocity", rb.velocity.y);
-        dashing();
+        
+        if(!isGrounded && Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("dash");
+            if(candash) StartCoroutine(dashing());
+        }
+
 
     }
 
-    void dashing()
-    {
-        if (Input.GetButtonDown("Jump"))
+    public IEnumerator dashing()
+    {    
+        candash = false;
+        isdashing = true;
+
+        if(!leftInput && !rightInput)
         {
-            clicked++;
-            if (clicked == 1) clicktime = Time.time;
+            rb.velocity = new Vector2(rb.velocity.x, dashingVelocity);
         }
-        if (clicked > 1 && Time.time - clicktime < clickdelay)
+        else if(rightInput)
         {
-            clicked = 0;
-            clicktime = 0;
-            Debug.Log("dash");
-        }   
+            rb.velocity = new Vector2(dashingVelocity, rb.velocity.y);
+        }
+        else if(leftInput)
+        {
+            rb.velocity = new Vector2(-dashingVelocity, rb.velocity.y);
+        }
+        
+        yield return new WaitForSeconds(0.5f);
+        isdashing = false;
+
+        yield return new WaitForSeconds(couldown);
+        candash = true;
     }
 }
