@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public bool leftCheck;
     public float lrcheckr;
 
+    public float wallSlideSpeed = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,18 @@ public class Player : MonoBehaviour
             direction = Mathf.MoveTowards(direction, 0, deccelerationspeed * Time.deltaTime);
         }
         
+        bool touchingWall = (rightCheck || leftCheck);
+        bool movingAgainstWall = (rightInput && rightCheck) || (leftInput && leftCheck);
+
+        if (!isGrounded && touchingWall && movingAgainstWall && rb.velocity.y < 0)
+        {
+            rb.gravityScale = wallSlideSpeed;
+        }
+        else 
+        {
+            rb.gravityScale = 3.0f;
+        }
+
 
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
