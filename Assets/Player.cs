@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     public float fadeDuration = 0.5f;
 
     public AudioSource dashsound;
+    public AudioSource deathsound;
     public GameObject runParticlesl;
     public GameObject runParticlesr;
 
@@ -156,6 +157,7 @@ public class Player : MonoBehaviour
     {   
         animator.SetBool("Die", true);
         StartCoroutine(Fade(0, 1));
+        deathsound.Play();
         yield return new WaitForSeconds(0.5f);;
         transform.position = lastcheckpoint;
         yield return new WaitForSeconds(0.5f);;
