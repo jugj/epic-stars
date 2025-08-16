@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public bool candash;
     public bool isdashing;
     public float couldown;
+    public TrailRenderer Trail;
 
     private bool leftInput, rightInput;
 
@@ -96,7 +97,14 @@ public class Player : MonoBehaviour
             if(candash) StartCoroutine(dashing());
         }
 
-
+        if(isdashing) 
+        {
+            Trail.enabled = true;
+        }
+        else
+        {
+            Trail.enabled = false;
+        }
     }
 
     public IEnumerator dashing()
