@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         bool touchingWall = (rightCheck || leftCheck);
         bool movingAgainstWall = (rightInput && rightCheck) || (leftInput && leftCheck);
 
-        if (!isGrounded && touchingWall && movingAgainstWall && rb.velocity.y < 0)
+        if (!isGrounded && touchingWall && movingAgainstWall && rb.velocity.y < 0 && Input.GetButton("Jump"))
         {
             rb.gravityScale = wallSlideSpeed;
         }

@@ -1044,7 +1044,7 @@ MonoBehaviour:
   rightCheck: 0
   leftCheck: 0
   lrcheckr: 0.4
-  wallSlideSpeed: 0.2
+  wallSlideSpeed: 1.2
 --- !u!95 &500474919
 Animator:
   serializedVersion: 5
