@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class Player : MonoBehaviour
     public AudioSource deathsound;
     public AudioSource winsound;
     public AudioSource jumpsound;
+    public CinemachineImpulseSource impulse;
+
+    private bool wasisGroundaktive = false;
 
 
     // Start is called before the first frame update
@@ -127,6 +131,7 @@ public class Player : MonoBehaviour
         candash = false;
         isdashing = true;
         dashsound.Play();
+        CameraShakedash();
 
         if(!leftInput && !rightInput)
         {
@@ -156,7 +161,7 @@ public class Player : MonoBehaviour
         }
         if(col.gameObject.tag == "CheckPoint")
         {
-            lastcheckpoint = transform.position + new Vector3(0,1,0);
+            lastcheckpoint = transform.position;
         }
     }
 
@@ -222,5 +227,10 @@ public class Player : MonoBehaviour
 
 
 }
+
+    void CameraShakedash() 
+    {
+        CameraShakeManager.instance.CameraShake1(impulse);
+    }
 }
 
