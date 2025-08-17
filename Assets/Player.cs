@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         bool movingAgainstWall = (rightInput && rightCheck) || (leftInput && leftCheck);
 
 
-        if (!isdashing) rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+        if (!isdashing && !dieonce) rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
         animator.SetFloat("direction", Mathf.Abs(direction));
 
