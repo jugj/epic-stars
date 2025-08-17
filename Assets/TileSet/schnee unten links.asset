@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: schnee unten links
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e499e40a307163d49b2e1ce74fb0e063, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 916e524e984a837499f342632abe65ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
