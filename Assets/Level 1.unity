@@ -9144,7 +9144,7 @@ TrailRenderer:
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
-    shadowBias: 0.5
+    shadowBias: 0.35
     generateLightingData: 1
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
@@ -9163,7 +9163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ede609064f74f54886c3cf40526e8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalShakeForce: 0.1
+  globalShakeForce: 0.5
 --- !u!114 &500474923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9178,7 +9178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 3
+    m_ImpulseShape: 2
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
