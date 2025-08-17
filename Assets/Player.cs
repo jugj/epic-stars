@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         rightCheck = Physics2D.OverlapCircle(rightCheckobj.transform.position, lrcheckr, groundLayer);
         leftCheck = Physics2D.OverlapCircle(leftCheckobj.transform.position, lrcheckr, groundLayer);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if ((Input.GetButtonDown("Jump")  || Input.GetKeyDown("w") || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             animator.SetBool("isJumping", true);
