@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public AudioSource dashsound;
     public AudioSource deathsound;
     public AudioSource winsound;
+    public AudioSource jumpsound;
 
 
     // Start is called before the first frame update
@@ -94,6 +95,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             animator.SetBool("isJumping", true);
+            jumpsound.Play();
         }
         else 
         {
@@ -178,7 +180,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);;
         transform.position = lastcheckpoint;
         yield return new WaitForSeconds(0.5f);;
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level 1");
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)

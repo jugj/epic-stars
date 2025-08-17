@@ -2,50 +2,50 @@ using UnityEngine;
 
 public class FallingBlocks1 : MonoBehaviour
 {
-    public GameObject[] bridgeParts;
     public float fadeDelay = 1f;
     public float fadeDuration = 2f;
-    public float fallDelay = 0.5f;
 
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+    private BoxCollider2D col;
     private bool hasCollided = false;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<BoxCollider2D>();
+
+        if (rb != null)
+            rb.isKinematic = true; // Start als statisch
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
         {
             if (hasCollided) return;
 
-            hasCollided = true;
-
-            StartCoroutine(DestroyBridgeParts());
-        }
-    }
-
-    private System.Collections.IEnumerator DestroyBridgeParts()
-    {
-        for (int i = 0; i < bridgeParts.Length - 1; i++)
-        {
-            if (bridgeParts[i] != null)
-            {
-                StartCoroutine(DestroyPart(bridgeParts[i]));
-                yield return new WaitForSeconds(fadeDelay);
-            }
-        }
-
-        DestroyLastPart();
-    }
-
-    private System.Collections.IEnumerator DestroyPart(GameObject part)
-    {
-        Rigidbody2D rb = part.GetComponent<Rigidbody2D>();
-        SpriteRenderer sr = part.GetComponent<SpriteRenderer>();
-        BoxCollider2D col = part.GetComponent<BoxCollider2D>();
+        hasCollided = true;
 
         if (rb != null)
-            rb.isKinematic = false;
-        if (col != null)
+            rb.isKinematic = false; // Physik aktivieren
             col.isTrigger = true;
 
+        // Starte Fading
+        Invoke(nameof(StartFade), fadeDelay);
+        }
+        
+    }
+
+    void StartFade()
+    {
+        StartCoroutine(FadeAndDestroy());
+    }
+
+    private System.Collections.IEnumerator FadeAndDestroy()
+    {
+        
         float elapsed = 0f;
         Color originalColor = sr.color;
 
@@ -57,24 +57,6 @@ public class FallingBlocks1 : MonoBehaviour
             yield return null;
         }
 
-        Destroy(part);
-    }
-
-    void DestroyLastPart()
-    {
-        if (bridgeParts.Length > 0 && bridgeParts[bridgeParts.Length - 1] != null)
-        {
-            GameObject lastPart = bridgeParts[bridgeParts.Length - 1];
-            Rigidbody2D rb = lastPart.GetComponent<Rigidbody2D>();
-            SpriteRenderer sr = lastPart.GetComponent<SpriteRenderer>();
-            BoxCollider2D col = lastPart.GetComponent<BoxCollider2D>();
-
-            if (rb != null)
-                rb.isKinematic = false;
-            if (col != null)
-                col.isTrigger = true;
-
-            StartCoroutine(DestroyPart(lastPart));
-        }
+        Destroy(gameObject);
     }
 }
