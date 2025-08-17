@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     public CinemachineImpulseSource impulse;
 
     private bool wasisGroundaktive = false;
+    private bool dieonce = false;
 
 
     // Start is called before the first frame update
@@ -155,7 +156,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "death")
+        if(col.gameObject.tag == "death" && !dieonce)
         {
             StartCoroutine(death());
         }
@@ -167,6 +168,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator death() 
     {   
+        dieonce = true;
         animator.SetBool("Die", true);
         StartCoroutine(Fade(0, 1));
         deathsound.Play();
@@ -175,6 +177,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);;
         animator.SetBool("Die", false);
         StartCoroutine(Fade(1, 0));
+        dieonce = false;
         
     }
 
