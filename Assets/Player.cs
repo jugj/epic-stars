@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -39,13 +40,13 @@ public class Player : MonoBehaviour
 
     public AudioSource dashsound;
     public AudioSource deathsound;
-    public GameObject runParticlesl;
-    public GameObject runParticlesr;
+    public AudioSource winsound;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(Fade(1, 0));
         lastcheckpoint = new Vector3(12, -40, 0);
     }
 
@@ -151,6 +152,10 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(death());
         }
+        if(col.gameObject.tag == "CheckPoint")
+        {
+            lastcheckpoint = transform.position + new Vector3(0,1,0);
+        }
     }
 
     public IEnumerator death() 
@@ -164,6 +169,16 @@ public class Player : MonoBehaviour
         animator.SetBool("Die", false);
         StartCoroutine(Fade(1, 0));
         
+    }
+
+    public IEnumerator winning() 
+    {   
+        StartCoroutine(Fade(0, 1));
+        winsound.Play();
+        yield return new WaitForSeconds(0.5f);;
+        transform.position = lastcheckpoint;
+        yield return new WaitForSeconds(0.5f);;
+        SceneManager.LoadScene("Level1");
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
@@ -205,13 +220,5 @@ public class Player : MonoBehaviour
 
 
 }
-
-    void OnTriggerEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "CheckPoint")
-        {
-            lastcheckpoint = transform.position;
-        }
-    }
 }
 

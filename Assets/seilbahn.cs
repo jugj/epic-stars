@@ -23,7 +23,7 @@ public class seilbahn : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             animator.SetBool("Winning", true);
-            StartCoroutine(player.death());
+            StartCoroutine(player.winning());
             player.lastcheckpoint = new Vector3(-6,0,0);
         }
     }
