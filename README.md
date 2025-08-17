@@ -1,1 +1,1 @@
-# Demo: https://jugj.github.io/epic-stars/index.html
+# Demo: https://jugj.github.io/epic-stars
